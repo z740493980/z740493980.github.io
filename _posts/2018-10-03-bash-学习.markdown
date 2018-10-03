@@ -1,0 +1,353 @@
+<p align="center">
+  <img src="https://cloud.githubusercontent.com/assets/2059754/24601246/753a7f36-1858-11e7-9d6b-7a0e64fb27f7.png" alt="bash logo"/>
+</p>
+
+## Table of Contents
+  1. [Basic Operations](#1-basic-operations)  
+    1.1. [File Operations](#11-file-operations)  
+    1.2. [Text Operations](#12-text-operations)  
+    1.3. [Directory Operations](#13-directory-operations)  
+    1.4. [SSH, System Info & Network Operations](#14-ssh-system-info--network-operations)  
+    1.5. [Process Monitoring Operations](#15-process-monitoring-operations)
+  2. [Basic Shell Programming](#2-basic-shell-programming)  
+    2.1. [Variables](#21-variables)  
+    2.2. [Array](#22-array)  
+    2.3. [String Substitution](#23-string-substitution)  
+    2.4. [Functions](#24-functions)  
+    2.5. [Conditionals](#25-conditionals)  
+    2.6. [Loops](#26-loops)  
+  3. [Tricks](#3-tricks)  
+  4. [Debugging](#4-debugging)  
+  
+
+# 1. Basic Operations
+
+### a. `export`
+Displays all environment variables. If you want to get details of a specific variable, use `echo $VARIABLE_NAME`.  
+```bash
+export
+```
+Example:
+```bash
+$ export
+AWS_HOME=/Users/adnanadnan/.aws
+LANG=en_US.UTF-8
+LC_CTYPE=en_US.UTF-8
+LESS=-R
+
+$ echo $AWS_HOME
+/Users/adnanadnan/.aws
+```
+
+### b. `whatis`
+whatis shows description for user commands, system calls, library functions, and others in manual pages
+```bash
+whatis something
+```
+Example:
+```bash
+$ whatis bash
+bash (1)             - GNU Bourne-Again SHell
+```
+
+### c. `whereis`
+whereis searches for executables, source files, and manual pages using a database built by system automatically.
+```bash
+whereis name
+```
+Example:
+```bash
+$ whereis php
+/usr/bin/php
+```
+
+### d. `which`
+which searches for executables in the directories specified by the environment variable PATH. This command will print the full path of the executable(s).
+```bash
+which program_name 
+```
+Example:
+```bash
+$ which php
+/c/xampp/php/php
+```
+
+### e. clear
+Clears content on window.
+
+## 1.1. File Operations
+<table>
+   <tr>
+      <td><a href="#a-cat">cat</a></td>
+      <td><a href="#b-chmod">chmod</a></td>
+      <td><a href="#c-chown">chown</a></td>
+      <td><a href="#d-cp">cp</a></td>
+      <td><a href="#e-diff">diff</a></td>
+      <td><a href="#f-file">file</a></td>
+      <td><a href="#g-find">find</a></td>
+      <td><a href="#h-gunzip">gunzip</a></td>
+      <td><a href="#i-gzcat">gzcat</a></td>
+      <td><a href="#j-gzip">gzip</a></td>
+      <td><a href="#k-head">head</a></td>
+   </tr>
+   <tr>
+      <td><a href="#l-lpq">lpq</a></td>
+      <td><a href="#m-lpr">lpr</a></td>
+      <td><a href="#n-lprm">lprm</a></td>
+      <td><a href="#o-ls">ls</a></td>
+      <td><a href="#p-more">more</a></td>
+      <td><a href="#q-mv">mv</a></td>
+      <td><a href="#r-rm">rm</a></td>
+      <td><a href="#s-tail">tail</a></td>
+      <td><a href="#t-touch">touch</a></td>
+   </tr>
+</table>
+
+### a. `cat`
+It can be used for the following purposes under UNIX or Linux.  
+* Display text files on screen
+* Copy text files  
+* Combine text files  
+* Create new text files  
+```bash
+cat filename
+cat file1 file2 
+cat file1 file2 > newcombinedfile
+cat < file1 > file2 #copy file1 to file2
+```
+
+### b. `chmod`
+The chmod command stands for "change mode" and allows you to change the read, write, and execute permissions on your files and folders. For more information on this command check this [link](https://ss64.com/bash/chmod.html).
+```bash
+chmod -options filename
+```
+
+### c. `chown`
+The chown command stands for "change owner", and allows you to change the owner of a given file or folder, which can be a user and a group. Basic usage is simple forward first comes the user (owner), and then the group, delimited by a colon.
+```bash
+chown -options user:group filename
+```
+
+### d. `cp`
+Copies a file from one location to other.  
+```bash
+cp filename1 filename2
+```
+Where `filename1` is the source path to the file and `filename2` is the destination path to the file.
+
+### e. `diff`
+Compares files, and lists their differences.  
+```bash
+diff filename1 filename2
+```
+
+### f. `file`
+Determine file type.  
+```bash
+file filename
+```
+Example:
+```bash
+$ file index.html
+ index.html: HTML document, ASCII text
+```
+### g. `find`
+Find files in directory
+```bash
+find directory options pattern
+```
+Example:
+```bash
+$ find . -name README.md
+$ find /home/user1 -name '*.png'
+```
+
+### h. `gunzip`
+Un-compresses files compressed by gzip.  
+```bash
+gunzip filename
+```
+
+### i. `gzcat`
+Lets you look at gzipped file without actually having to gunzip it.  
+```bash
+gzcat filename
+```
+
+### j. `gzip`
+Compresses files.  
+```bash
+gzip filename
+```
+
+### k. `head`
+Outputs the first 10 lines of file  
+```bash
+head filename
+```
+
+### l. `lpq`
+Check out the printer queue.  
+```bash
+lpq
+```
+Example:
+```bash
+$ lpq
+Rank    Owner   Job     File(s)                         Total Size
+active  adnanad 59      demo                            399360 bytes
+1st     adnanad 60      (stdin)                         0 bytes
+```
+
+### m. `lpr`
+Print the file.  
+```bash
+lpr filename
+```
+
+### n. `lprm`
+Remove something from the printer queue.  
+```bash
+lprm jobnumber
+```
+
+### o. `ls`
+Lists your files. `ls` has many options: `-l` lists files in 'long format', which contains the exact size of the file, who owns the file, who has the right to look at it, and when it was last modified. `-a` lists all files, including hidden files. For more information on this command check this [link](https://ss64.com/bash/ls.html).  
+```bash
+ls option
+```
+Example:
+<pre>
+$ ls -la
+rwxr-xr-x   33 adnan  staff    1122 Mar 27 18:44 .
+drwxrwxrwx  60 adnan  staff    2040 Mar 21 15:06 ..
+-rw-r--r--@  1 adnan  staff   14340 Mar 23 15:05 .DS_Store
+-rw-r--r--   1 adnan  staff     157 Mar 25 18:08 .bumpversion.cfg
+-rw-r--r--   1 adnan  staff    6515 Mar 25 18:08 .config.ini
+-rw-r--r--   1 adnan  staff    5805 Mar 27 18:44 .config.override.ini
+drwxr-xr-x  17 adnan  staff     578 Mar 27 23:36 .git
+-rwxr-xr-x   1 adnan  staff    2702 Mar 25 18:08 .gitignore
+</pre>
+
+### p. `more`
+Shows the first part of a file (move with space and type q to quit).  
+```bash
+more filename
+```
+
+### q. `mv`
+Moves a file from one location to other.  
+```bash
+mv filename1 filename2
+```
+Where `filename1` is the source path to the file and `filename2` is the destination path to the file.
+
+Also it can be used for rename a file.
+```bash
+mv old_name new_name
+```
+
+### r. `rm`
+Removes a file. Using this command on a directory gives you an error.
+`rm: directory: is a directory`
+To remove a directory you have to pass `-r` which will remove the content of the directory recursively. Optionally you can use `-f` flag to force the deletion i.e. without any confirmations etc.
+```bash
+rm filename
+```
+
+### s. `tail`
+Outputs the last 10 lines of file. Use `-f` to output appended data as the file grows.  
+```bash
+tail filename
+```
+
+### t. `touch`
+Updates access and modification time stamps of your file. If it doesn't exists, it'll be created.
+```bash
+touch filename
+```
+Example:
+```bash
+$ touch trick.md
+```
+
+## 1.2. Text Operations
+
+<table>
+    <tr>
+      <td><a href="#a-awk">awk</a></td>
+      <td><a href="#b-cut">cut</a></td>
+      <td><a href="#c-echo">echo</a></td>
+      <td><a href="#d-egrep">egrep</a></td>
+      <td><a href="#e-fgrep">fgrep</a></td>
+      <td><a href="#f-fmt">fmt</a></td>
+      <td><a href="#g-grep">grep</a></td>
+      <td><a href="#h-nl">nl</a></td>
+      <td><a href="#i-sed">sed</a></td>
+      <td><a href="#j-sort">sort</a></td>
+   </tr>
+   <tr>
+      <td><a href="#k-tr">tr</a></td>
+      <td><a href="#l-uniq">uniq</a></td>
+      <td><a href="#m-wc">wc</a></td>
+   </tr>
+</table>
+
+### a. `awk`
+awk is the most useful command for handling text files. It operates on an entire file line by line. By default it uses whitespace to separate the fields. The most common syntax for awk command is
+
+```bash
+awk '/search_pattern/ { action_to_take_if_pattern_matches; }' file_to_parse
+```
+
+Lets take following file `/etc/passwd`. Here's the sample data that this file contains:
+```
+root:x:0:0:root:/root:/usr/bin/zsh
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+```
+So now lets get only username from this file. Where `-F` specifies that on which base we are going to separate the fields. In our case it's `:`. `{ print $1 }` means print out the first matching field.
+```bash
+awk -F':' '{ print $1 }' /etc/passwd
+```
+After running the above command you will get following output.
+```
+root
+daemon
+bin
+sys
+sync
+```
+For more detail on how to use `awk`, check following [link](https://www.cyberciti.biz/faq/bash-scripting-using-awk).
+
+
+### b. `cut`
+Remove sections from each line of files
+
+*example.txt*
+```bash
+red riding hood went to the park to play
+```
+
+*show me columns 2 , 7 , and 9 with a space as a separator*
+```bash
+cut -d " " -f2,7,9 example.txt
+```
+```bash
+riding park play
+```
+
+### c. `echo`
+Display a line of text
+
+*display "Hello World"*
+```bash
+echo Hello World
+```
+```bash
+Hello World
+```
+
+*display "Hello World
