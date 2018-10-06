@@ -2,7 +2,7 @@
 layout:     post
 title:      "优质的中文前端博客"
 subtitle:   " \"Hello World, Hello Blog\""
-date:       2018-10-06 20:00:00
+date:       2018-10-02 20:00:00
 author:     "Colin"
 header-img: "img/post-bg-2015.jpg"
 catalog: true
